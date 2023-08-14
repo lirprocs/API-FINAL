@@ -52,6 +52,8 @@ services:
       context: .
       dockerfile: Dockerfile-celery
     container_name: celery_worker
+    volumes:
+      - ./app/admin:/app/app/admin
     environment:
       - BROKER_URL=pyamqp://guest:guest@rabbitmq:5672//
     depends_on:
