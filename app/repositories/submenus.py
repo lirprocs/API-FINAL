@@ -5,29 +5,6 @@ from app.database.db_setup import async_session_maker
 from app.database.models.dish import Dish
 from app.database.models.submenu import SubMenu
 
-'''
-class AbstractRepository(ABC):
-
-    @abstractmethod
-    async def get_submenus(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    async def create_submenu(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    async def get_submenu(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    async def delete_submenu(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    async def update_submenu(self):
-        raise NotImplementedError
-'''
 
 
 class SubMenuRepository:  # AbstractRepository
