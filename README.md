@@ -14,3 +14,7 @@ docker-compose -f docker-compose-test.yaml up
 Приложение готово к тестированию! Оно доступно на порту 8000. Основной исполняемый файл находится по адресу `/app/main.py`.
 
 Тесты находятся в директории `app/tests`.
+
+
+    volumes:
+      - ./app/admin:/app/app/admin
