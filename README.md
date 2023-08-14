@@ -11,6 +11,7 @@ docker-compose -f docker-compose-test.yaml up
 docker-compose down --rmi all --volumes --remove-orphans
 ```
 **Примечание:** Оба варианта используют одни и те же порты, поэтому при запуске одного из них, другой должен быть остановлен.
+
 5. В дерриктории проекта выполните:
 ```bash
 docker-compose up
