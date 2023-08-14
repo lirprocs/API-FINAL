@@ -3,7 +3,6 @@ from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-
 SQLALCHEMY_DATABASE_URL = "postgresql+asyncpg://docker:password@db/restoran"
 
 Base = declarative_base()
