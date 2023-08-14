@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from ..db_setup import Base
 
 
-class Menu(Base):  # type: ignore
+class Menu(Base): 
     __tablename__ = 'Menus'
     id = Column(Integer, primary_key=True, index=True)
     manual_id = Column(String, unique=True, nullable=True)
