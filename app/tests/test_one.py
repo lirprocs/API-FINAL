@@ -1,16 +1,9 @@
 from httpx import AsyncClient
 
-
-# проверяем, чтобы изначальный список меню был пустой
-async def test_read_menus(ac: AsyncClient, start_tables):
-    response = await ac.get('/api/v1/menus')
-    assert response.status_code == 200
-    assert response.json() == []
-
 # проверяем добавление меню
 
 
-async def test_create_menu(ac: AsyncClient):
+async def test_create_menu(ac: AsyncClient, start_tables):
     response = await ac.post(
         '/api/v1/menus',
         json={'title': 'Created menu', 'description': 'Created menu description'},
@@ -22,6 +15,18 @@ async def test_create_menu(ac: AsyncClient):
         'description': 'Created menu description',
         'manual_id': None
     }
+
+# проверяем вывод списка меню
+
+
+async def test_read_menus(ac: AsyncClient):
+    response = await ac.get('/api/v1/menus')
+    assert response.status_code == 200
+    assert response.json() == [{
+        'title': 'Created menu',
+        'id': 1,
+        'description': 'Created menu description',
+    }]
 
 # проверяем изменение меню
 
@@ -118,7 +123,6 @@ async def test_read_submenus(ac: AsyncClient):
         'description': 'Updated submenu description',
         'id': 1,
         'parent_id': 1,
-        #'manual_id': None
     }]
 
 # проверяем количество подменю и блюд в конкретном меню
@@ -203,7 +207,6 @@ async def test_read_dishes(ac: AsyncClient):
         'id': 1,
         'parent_id': 1,
         'main_menu_id': 1,
-        #'manual_id': None
     }]
 
 # проверяем количество подменю и блюд в конкретном меню
@@ -221,33 +224,36 @@ async def test_read_menu_dishes(ac: AsyncClient):
         'manual_id': None
     }
 
+# проверяем получение всех меню с подменю и блюдами
 
-async def test_read_full_menus(ac: AsyncClient):
+
+async def test_read_full_menu(ac: AsyncClient):
     response = await ac.get('/api/v1/full_menus')
     assert response.status_code == 200
-    data = response.json()
-    menus = data.get('menus', [])
-    assert len(menus) > 0  # Проверяем, что список меню не пустой
-
-    for menu in menus:
-        assert 'id' in menu
-        assert 'title' in menu
-        assert 'description' in menu
-        submenus = menu.get('submenus', [])
-
-        for submenu in submenus:
-            assert 'id' in submenu
-            assert 'title' in submenu
-            assert 'description' in submenu
-            dishes = submenu.get('dishes', [])
-
-            for dish in dishes:
-                assert 'id' in dish
-                assert 'title' in dish
-                assert 'description' in dish
-                assert 'price' in dish
-
-
+    assert response.json() =={
+        'menus': [
+        {
+            'id': 1,
+            'title': 'Updated menu',
+            'description': 'Updated menu description',
+            'submenus': [
+                {
+                    'id': 1,
+                    'title': 'Updated submenu',
+                    'description': 'Updated submenu description',
+                    'dishes': [
+                        {
+                            'title': 'Updated dish',
+                            'description': 'Updated dish description',
+                            'price': '0.55',
+                            'id': 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
 # проверяем удаление блюда
 
 
