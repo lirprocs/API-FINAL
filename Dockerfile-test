@@ -1,0 +1,19 @@
+# Установка Python
+FROM python:3.10-slim
+
+# Установка рабочей директории
+WORKDIR /test
+
+# Копирование проекта
+ADD . /test
+
+# Установка переменных окружения
+ENV PYTHONPATH=/test
+ENV SQLALCHEMY_DATABASE_URL="postgresql+asyncpg://docker:password@db/restoran"
+ENV URL="http://web-test:8000"
+
+# Установка зависимостей
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Запуск pytest при запуске контейнера
+CMD ["pytest app/tests"]
