@@ -56,7 +56,7 @@ class MenuRepository():  # AbstractRepository
             await session.commit()
             return db_menu
 
-    async def update_menu(self, menu_id: int, title: str, description: str):
+    async def update_menu(self, menu_id: int, title: str, description: str | None):
         async with async_session_maker() as session:
             db_menu = await session.get(self.model, menu_id)
 
