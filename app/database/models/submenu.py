@@ -7,7 +7,6 @@ from ..db_setup import Base
 class SubMenu(Base):
     __tablename__ = 'Submenus'
     id = Column(Integer, primary_key=True, index=True)
-    manual_id = Column(String, unique=True, nullable=True)
     title = Column(String(), unique=True, nullable=False)
     description = Column(String())
     parent_id = Column(Integer, ForeignKey('Menus.id'))
