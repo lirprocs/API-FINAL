@@ -7,6 +7,7 @@ from ..db_setup import Base
 class Dish(Base):
     __tablename__ = 'Dishes'
     id = Column(Integer, primary_key=True, index=True)
+    manual_id = Column(String, unique=True, nullable=True)
     title = Column(String(), unique=True, nullable=False)
     description = Column(String())
     price = Column(Numeric(10, 2), nullable=False)
