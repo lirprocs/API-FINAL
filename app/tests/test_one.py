@@ -11,7 +11,8 @@ async def test_create_menu(ac: AsyncClient, start_tables):
     assert response.json() == {
         'title': 'Created menu',
         'id': '1',
-        'description': 'Created menu description'
+        'description': 'Created menu description',
+        'manual_id': None
     }
 
 
@@ -22,7 +23,7 @@ async def test_read_menus(ac: AsyncClient):
     assert response.json() == [{
         'title': 'Created menu',
         'id': 1,
-        'description': 'Created menu description',
+        'description': 'Created menu description'
     }]
 
 
@@ -39,7 +40,8 @@ async def test_update_menu(ac: AsyncClient):
         'id': 1,
         'description': 'Updated menu description',
         'dishes_count': 0,
-        'submenus_count': 0
+        'submenus_count': 0,
+        'manual_id': None
     }
 
 
@@ -52,7 +54,8 @@ async def test_read_menu(ac: AsyncClient):
         'id': '1',
         'description': 'Updated menu description',
         'submenus_count': 0,
-        'dishes_count': 0
+        'dishes_count': 0,
+        'manual_id': None
     }
 
 
@@ -67,7 +70,8 @@ async def test_create_submenu(ac: AsyncClient):
         'title': 'Created submenu',
         'id': '1',
         'description': 'Created submenu description',
-        'parent_id': '1'
+        'parent_id': '1',
+        'manual_id': None
     }
 
 
@@ -83,7 +87,8 @@ async def test_update_submenu(ac: AsyncClient):
         'id': 1,
         'description': 'Updated submenu description',
         'parent_id': 1,
-        'dishes_count': 0
+        'dishes_count': 0,
+        'manual_id': None
     }
 
 
@@ -96,7 +101,8 @@ async def test_read_submenu(ac: AsyncClient):
         'id': 1,
         'description': 'Updated submenu description',
         'parent_id': 1,
-        'dishes_count': 0
+        'dishes_count': 0,
+        'manual_id': None
     }
 
 
@@ -121,7 +127,8 @@ async def test_read_menu_submenus(ac: AsyncClient):
         'id': '1',
         'description': 'Updated menu description',
         'submenus_count': 1,
-        'dishes_count': 0
+        'dishes_count': 0,
+        'manual_id': None
     }
 
 
@@ -138,7 +145,8 @@ async def test_create_dish(ac: AsyncClient):
         'description': 'Created dish description',
         'price': '0.55',
         'main_menu_id': 1,
-        'parent_id': '1'
+        'parent_id': '1',
+        'manual_id': None
     }
 
 
@@ -155,7 +163,8 @@ async def test_update_dish(ac: AsyncClient):
         'description': 'Updated dish description',
         'price': '0.55',
         'main_menu_id': 1,
-        'parent_id': 1
+        'parent_id': 1,
+        'manual_id': None
     }
 
 
@@ -169,7 +178,8 @@ async def test_read_dish(ac: AsyncClient):
         'description': 'Updated dish description',
         'price': '0.55',
         'main_menu_id': 1,
-        'parent_id': 1
+        'parent_id': 1,
+        'manual_id': None
     }
 
 
@@ -196,7 +206,8 @@ async def test_read_menu_dishes(ac: AsyncClient):
         'id': '1',
         'description': 'Updated menu description',
         'submenus_count': 1,
-        'dishes_count': 1
+        'dishes_count': 1,
+        'manual_id': None
     }
 
 
@@ -228,8 +239,8 @@ async def test_read_full_menu(ac: AsyncClient):
         }
     ]
 }
-    
-    
+
+
 # проверяем удаление блюда
 async def test_delete_dish(ac: AsyncClient):
     response = await ac.delete('/api/v1/menus/1/submenus/1/dishes/1')
@@ -246,4 +257,3 @@ async def test_delete_submenu(ac: AsyncClient):
 async def test_delete_menu(ac: AsyncClient):
     response = await ac.delete('/api/v1/menus/1')
     assert response.status_code == 200
-    
