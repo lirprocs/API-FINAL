@@ -49,7 +49,8 @@ class DishRepository:  # AbstractRepository
 
             return db_menu
 
-    async def update_dish(self, menu_id: int, submenu_id: int, dish_id: int, title: str, description: str, price: float):
+    async def update_dish(self, menu_id: int, submenu_id: int, dish_id: int, title: str, description: str | None,
+                          price: float | str | None):
         async with async_session_maker() as session:
             db_menu = await session.get(self.model, dish_id)
 
